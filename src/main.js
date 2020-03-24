@@ -1,11 +1,17 @@
 import Vue from 'vue'
+import ElementUI from 'element-ui'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 import './assets/styles/normalize.css'
+import 'element-ui/lib/theme-chalk/index.css'
 
 import './registerServiceWorker'
+
+Vue.use(ElementUI)
+
 
 Vue.config.productionTip = false
 
