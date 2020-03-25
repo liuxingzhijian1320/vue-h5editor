@@ -1,81 +1,56 @@
 <template>
-  <div class="tools" id="tools">
-    <el-tooltip
-      class="tools-item dc pointer"
-      effect="dark"
-      content="文字"
-      placement="left"
-    >
-      <el-button>
-        <i class="iconfont seft-icon">&#xe649;</i>
-      </el-button>
-    </el-tooltip>
-    <el-tooltip
-      class="tools-item dc pointer"
-      effect="dark"
-      content="图片"
-      placement="left"
-    >
-      <el-button>
-        <i class="iconfont seft-icon">&#xe638;</i>
-      </el-button>
-    </el-tooltip>
-    <el-tooltip
-      class="tools-item dc pointer"
-      effect="dark"
-      content="视频"
-      placement="left"
-    >
-      <el-button>
-        <i class="iconfont seft-icon">&#xe60f;</i>
-      </el-button>
-    </el-tooltip>
-    <el-tooltip
-      class="tools-item dc pointer"
-      effect="dark"
-      content="预览"
-      placement="left"
-    >
-      <el-button>
-        <i class="iconfont seft-icon">&#xe60b;</i>
-      </el-button>
-    </el-tooltip>
-    <el-tooltip
-      class="tools-item dc pointer"
-      effect="dark"
-      content="保存"
-      placement="left"
-    >
-      <el-button>
-        <i class="iconfont seft-icon">&#xe612;</i>
-      </el-button>
-    </el-tooltip>
-  </div>
+  <ul class="tools">
+    <li class="tools-item dc pointer">
+      <i class="iconfont seft-icon">&#xe649;</i>
+      <div class="tools-label">文字</div>
+    </li>
+    <li class="tools-item dc pointer">
+      <i class="iconfont seft-icon">&#xe638;</i>
+      <div class="tools-label">图片</div>
+    </li>
+    <li class="tools-item dc pointer">
+      <i class="iconfont seft-icon">&#xe814;</i>
+      <div class="tools-label">视频</div>
+    </li>
+    <li class="tools-item dc pointer">
+      <i class="iconfont seft-icon">&#xe60b;</i>
+      <div class="tools-label">预览</div>
+    </li>
+    <li class="tools-item dc pointer">
+      <i class="iconfont seft-icon">&#xe612;</i>
+      <div class="tools-label">保存</div>
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
-  name: 'tools',
+  name: "tools"
 };
 </script>
 
 <style scoped lang="scss">
 .tools {
-  padding-top: 30px;
+  display: flex;
+  width: 400px;
+  // background: red;
 }
 .tools-item {
-  margin-bottom: 10px;
-  margin-left: 0 !important;
-  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
   width: 50px;
   height: 50px;
   border-radius: 4px;
   background: #fff;
+  color: #999;
   list-style: none;
-
+  .tools-label {
+    font-size: 14px;
+  }
   .seft-icon {
-    color: #999;
-    font-size: 28px;
+    display: inline-block;
+    font-size: 24px;
   }
 }
 </style>

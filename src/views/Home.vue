@@ -1,62 +1,38 @@
 <template>
   <div class="home">
-    <section class="aside"></section>
-    <section class="content dc">
-      <div id="screen">
-        <i class="iconfont wenzi-icon">&#xe60b;</i>
-      </div>
-    </section>
-    <section class="tools-wrapper">
-      <tools class="tools-content"></tools>
-      <panel class="panel-content"></panel>
-    </section>
+    <myheader></myheader>
+    <div class="wrapper">
+      <leftaside></leftaside>
+      <contentbox></contentbox>
+      <panel></panel>
+    </div>
   </div>
 </template>
 
 <script>
-import tools from '@/components/tools';
-import panel from '@/components/panel';
+import myheader from "@/components/myheader";
+import panel from "@/components/panel";
+import leftaside from "@/components/leftaside";
+import contentbox from "@/components/contentbox";
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    tools,
+    myheader,
     panel,
-  },
+    leftaside,
+    contentbox
+  }
 };
 </script>
 <style lang="scss">
 .home {
   display: flex;
+  overflow: hidden;
+  flex-direction: column;
   height: 100vh;
-  .aside {
-    width: 200px;
-    background: #4d4d4d;
-  }
-  .content {
-    width: 400px;
-    background: #282828;
-    #screen {
-      overflow: hidden;
-      width: 375px;
-      height: 603px;
-      background: #fff;
-      background-image: url(../assets/images/transparent.jpg);
-      background-position: 0 0;
-      background-size: 16px 16px;
-      background-repeat: repeat;
-    }
-  }
-  .tools-wrapper {
+  .wrapper {
     display: flex;
     flex: 1;
-    background: #4d4d4d;
-    .tools-content {
-      padding-left: 30px;
-      width: 80px;
-    }
-    .panel-content {
-      flex: 1;
-    }
   }
 }
 </style>
