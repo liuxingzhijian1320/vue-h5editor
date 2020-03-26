@@ -28,7 +28,9 @@ export default {
   name: "tools",
   methods: {
     // 选择元素
-    checkoutTypeId(id) {}
+    checkoutTypeId(id) {
+      this.$store.commit("editor/selectActiveTypedId", id);
+    }
   }
 };
 </script>

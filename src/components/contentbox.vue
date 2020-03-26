@@ -5,7 +5,9 @@
         :style="getCommonStyle(item.commonStyle)"
         @handleElementClick="handleElementClick" :uuid="item.uuid"
         :defaultStyle="item.commonStyle" @resize="handleElementResize">
-        <component :is="item.elName" class="element-on-edit-pane" />
+        <!-- <component :is="item.elName" class="element-on-edit-pane" /> -->
+        <!-- textarea -->
+        <editText v-if="activeTypedId==1" />
       </editShape>
     </div>
   </section>
@@ -14,10 +16,12 @@
 <script>
 import { mapGetters } from "vuex";
 import editShape from "./edit-shape";
+import editText from "./edit-text";
 export default {
   name: "contentbox",
   components: {
-    editShape
+    editShape,
+    editText
   },
   data() {
     return {
@@ -31,14 +35,10 @@ export default {
       }
     };
   },
-  watch: {
-    activePage(newVal, oldVal) {
-      // console.info(555, newVal, oldVal);
-    }
-  },
   computed: {
     ...mapGetters({
-      activePage: "editor/activePage"
+      activePage: "editor/activePage",
+      activeTypedId: "editor/activeTypedId"
     })
   },
   methods: {

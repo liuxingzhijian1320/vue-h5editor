@@ -2,8 +2,9 @@
   <div id="attrbase" class="textcolor">
     <el-form ref="form" label-width="80px">
       <el-form-item label="文本内容">
-        <el-input size="mini" class="base-input" type="textarea"
-          v-model="activeElement.text">
+        <el-input size="mini" :value="activeElement.props.value"
+          class="base-input" type="textarea" @change="watchInput"
+          v-model="activeElement.props.value">
         </el-input>
       </el-form-item>
       <el-form-item label="字体颜色">
@@ -11,7 +12,8 @@
       </el-form-item>
       <el-form-item label="字体大小">
         <el-input-number class="my-size-num" size="mini"
-          controls-position="right" :min="0" v-model="activeElement.text">
+          controls-position="right" :min="0" @change="watchInput"
+          v-model="activeElement.styles.fontSize">
           <template slot="append">px</template>
         </el-input-number>
       </el-form-item>
@@ -80,10 +82,38 @@ export default {
   data() {
     return {
       uu: "",
-      activeElement: {}
+      activeElement: {
+        props: {
+          value: "10个肉包子"
+        },
+        styles: {
+          fontSize: 16
+        }
+      }
     };
   },
-  methods: {}
+  // watch: {
+  //   //监听数据的变化
+  //   activeElement: {
+  //     deep: true,
+  //     handler: function(newVal, oldVal) {
+  //       console.info(999999999999, newVal);
+  //       console.info("---------");
+  //       this.$store.commit(
+  //         "editor/updateElementPropsByIpnut",
+  //         this.activeElement
+  //       );
+  //     }
+  //   }
+  // },
+  methods: {
+    watchInput() {
+      this.$store.commit(
+        "editor/updateElementPropsByIpnut",
+        this.activeElement
+      );
+    }
+  }
 };
 </script>
 
