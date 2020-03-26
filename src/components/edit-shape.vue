@@ -36,6 +36,7 @@ export default {
       }
     };
   },
+  mounted() {},
   methods: {
     // 动态计算每个点的位置
     getPointStyle(point) {
@@ -90,7 +91,7 @@ export default {
      */
     handleMouseDownOnElement(e) {
       // 抛出事件让父组件设置当前元素选中状态
-      // this.$emit("handleElementClick");
+      this.$emit("handleElementClick", this.uuid);
 
       const pos = { ...this.defaultStyle };
       let startY = e.clientY;

@@ -1,15 +1,18 @@
 <template>
   <section class="content dc">
     <div id="screen">
-      <editShape :style="getCommonStyle(defaultStyle)"
-        :defaultStyle="defaultStyle" @resize="handleElementResize">
-        123
+      <editShape v-for="item in activePage.elements" :key="item.uuid"
+        :style="getCommonStyle(item.commonStyle)"
+        @handleElementClick="handleElementClick" :uuid="item.uuid"
+        :defaultStyle="item.commonStyle" @resize="handleElementResize">
+        <component :is="item.elName" class="element-on-edit-pane" />
       </editShape>
     </div>
   </section>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import editShape from "./edit-shape";
 export default {
   name: "contentbox",
@@ -27,6 +30,16 @@ export default {
         bottom: 0
       }
     };
+  },
+  watch: {
+    activePage(newVal, oldVal) {
+      // console.info(555, newVal, oldVal);
+    }
+  },
+  computed: {
+    ...mapGetters({
+      activePage: "editor/activePage"
+    })
   },
   methods: {
     /**
@@ -68,11 +81,22 @@ export default {
         : "";
       return style;
     },
+    /**
+     * 元素被点击
+     * @param uuid
+     */
+    handleElementClick(uuid) {
+      this.$store.commit("editor/setActiveUUID", uuid);
+    },
     handleElementResize(pos) {
-      this.defaultStyle = {
-        ...this.defaultStyle,
-        ...pos
-      };
+      if (!pos) {
+        return;
+      }
+      this.$store.commit("editor/updateActiveElementConfig", pos);
+      // this.defaultStyle = {
+      //   ...this.defaultStyle,
+      //   ...pos
+      // };
     }
   }
 };

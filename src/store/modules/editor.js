@@ -1,44 +1,33 @@
+import { commonStyleConfig } from '../config'
+
 // 初始状态
 const state = {
-    currentPageIndex: 0, // 高亮页面
-    activeElementIndex: 0, // 高亮元素
-    commonStyleConfig: {
-        position: 'absolute',
-        width: 375,
-        height: 30,
-        top: 200,
-        left: 0,
-        rotate: 0,
-        paddingTop: 0,
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingBottom: 0,
-        marginTop: 0,
-        marginLeft: 0,
-        marginRight: 0,
-        marginBottom: 0,
-        borderWidth: 0,
-        borderColor: '',
-        borderStyle: 'solid',
-        borderRadius: 0,
-        boxShadow: '',
-        fontSize: 16,
-        fontWeight: 500,
-        lineHeight: 1.4,
-        letterSpacing: 0,
-        textAlign: 'center',
-        color: '#000000',
-        backgroundColor: '',
-        backgroundImage: '',
-        backgroundSize: 'cover',
-        opacity: 1,
-        zIndex: 1
-    },
+    currentPageIndex: 0, // 高亮页面index
+    activeElementIndex: 0, // 高亮元素index
+    activePage: {}, // 高亮 页面
+    // 当前正在编辑的页面uuid
+    activePageUUID: 'page-1',
+    // 画板中选中的元素uuid
+    activeElementUUID: '',
+
     projectData: {
-        page: [{
+        pages: [{
+            uuid: 'page-1',
             elements: [{
-                commonStyle: {},
-            }]
+                    elName: 'div',
+                    uuid: 'el-1',
+                    commonStyle: {
+                        ...commonStyleConfig
+                    },
+                },
+                // {
+                //     elName: 'div',
+                //     uuid: 333,
+                //     commonStyle: {
+                //         ...commonStyleConfig
+                //     },
+                // }
+            ]
         }],
     }
 };
@@ -47,18 +36,51 @@ const state = {
 const getters = {
     currentPageIndex: state => state.currentPageIndex,
     activeElementIndex: state => state.activeElementIndex,
+    activeElementUUID: state => state.activeElementUUID,
+    activePage: state => {
+        return state.projectData.pages.find(v => { return v.uuid === state.activePageUUID })
+    }
 };
 
 // 数据改变
 const mutations = {
-    // switchLoginStatus(state, payload) {
-    //     state.loginstatus = payload;
-    // }
+    // 当前高亮的元素
+    setActiveUUID(state, ElementUUID) {
+        // 元素的uuid
+        state.activeElementUUID = ElementUUID;
+        // 获取 currentPageIndex activeElementIndex activePageUUID
+        state.projectData.pages.forEach((item, index) => {
+            item.elements.forEach((code, codeindex) => {
+                if (code.uuid === ElementUUID) {
+                    state.currentPageIndex = index
+                    state.activeElementIndex = codeindex
+                    state.activePageUUID = item.uuid
+                }
+            })
+        })
+    },
+
+    // 更新当前元素的信息
+    updateActiveElementConfig(state, payload) {
+        let activeEl = state.projectData.pages[state.currentPageIndex].elements[state.activeElementIndex].commonStyle
+        activeEl = {
+            ...activeEl,
+            ...payload
+        }
+        state.projectData.pages[state.currentPageIndex].elements[state.activeElementIndex].commonStyle = activeEl
+    }
 };
 
 // 逻辑响应
 const actions = {
-
+    /**
+     * 设置当前选中激活元素uuid
+     * @param state
+     * @param data
+     */
+    setActiveElementUUID({ commit }, uuid) {
+        commit('setActiveElementUUID', uuid);
+    },
 };
 
 export default {
