@@ -2,7 +2,7 @@
   <div class="panel">
     <ul class="panel-ul">
       <li @click="handleClick(1)" class="panel-li pointer"
-        :class="{'active': activeIndex==1}">图层样式</li>
+        :class="{'active': activeIndex==1}">图层属性</li>
       <li @click="handleClick(2)" class="panel-li pointer"
         :class="{'active': activeIndex==2}">图层动画</li>
       <li @click="handleClick(3)" class="panel-li pointer"
@@ -11,7 +11,7 @@
     <ul class="panel-content">
       <li class="panel-box box1" :class="{'active': activeIndex==1}"
         v-if="activeIndex == 1">
-        1
+        <attrbase />
       </li>
       <li class="panel-box box2" :class="{'active': activeIndex==2}"
         v-if="activeIndex == 2">
@@ -30,8 +30,12 @@
 </template>
 
 <script>
+import attrbase from "./attrbase";
 export default {
   name: "panel",
+  components: {
+    attrbase
+  },
   data() {
     return {
       activeIndex: 1
@@ -77,7 +81,7 @@ export default {
 .panel-content {
   position: relative;
   flex: 1;
-  width: 100%;
+
   .panel-box {
     position: absolute;
     top: 0;
@@ -86,9 +90,9 @@ export default {
     left: 0;
     display: none;
     overflow-y: scroll;
+    padding: 10px;
     // opacity: 0;
     &.box1 {
-      background: yellow;
     }
     &.box2 {
       background: green;
