@@ -11,7 +11,7 @@
     <ul class="panel-content">
       <li class="panel-box box1" :class="{'active': activeIndex==1}"
         v-if="activeIndex == 1">
-        <attrbase />
+        <baseProps />
       </li>
       <li class="panel-box box2" :class="{'active': activeIndex==2}"
         v-if="activeIndex == 2">
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import attrbase from "./attrbase";
+import baseProps from "./base-props";
 export default {
   name: "panel",
   components: {
-    attrbase
+    baseProps
   },
   data() {
     return {
